@@ -159,18 +159,19 @@ input[type="range"] {
 
 .canvas-shell {
   background: linear-gradient(180deg, #eaf3df 0%, #d4e5ce 60%, #f3f9f2 100%);
-  padding: 28px;
+  padding: 28px 28px 0;
   border-radius: 32px;
   border: 1px solid rgba(95, 136, 92, 0.14);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55);
+  overflow: hidden;
 }
 
 .tree-scene {
   position: relative;
-  width: 100%;
-  min-height: 420px;
-  max-width: 520px;
-  margin: 0 auto;
+  width: calc(100% + 56px);
+  min-height: 500px;
+  max-width: none;
+  margin: 0 -28px;
 }
 
 .soil {
@@ -178,10 +179,84 @@ input[type="range"] {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 18%;
+  height: 22%;
   background: linear-gradient(180deg, #8f6a42 0%, #6e4a28 100%);
   border-top-left-radius: 80% 18px;
   border-top-right-radius: 80% 18px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  z-index: 1;
+}
+
+.germination-graphic {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  width: 36px;
+  height: 36px;
+  margin-left: -18px;
+  background-image: url("Germination.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+
+.seedling-graphic,
+.sapling-graphic,
+.young-tree-graphic,
+.flowering-graphic,
+.fruiting-graphic {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+
+.seedling-graphic {
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  background-image: url("Seedling.png");
+}
+
+.sapling-graphic {
+  bottom: -6px;
+  width: 300px;
+  height: 300px;
+  margin-left: -150px;
+  background-image: url("Sapling.png");
+}
+
+.young-tree-graphic {
+  bottom: -18px;
+  width: 430px;
+  height: 500px;
+  margin-left: -215px;
+  background-image: url("Young Tree.png");
+}
+
+.flowering-graphic {
+  bottom: -18px;
+  width: 430px;
+  height: 500px;
+  margin-left: -215px;
+  background-image: url("Flowering.png");
+}
+
+.fruiting-graphic {
+  bottom: -18px;
+  width: 430px;
+  height: 500px;
+  margin-left: -215px;
+  background-image: url("Fruit.png");
 }
 
 .trunk {
@@ -259,40 +334,40 @@ input[type="range"] {
 .seed {
   position: absolute;
   left: 50%;
-  bottom: 22%;
-  width: 18px;
-  height: 28px;
-  margin-left: -9px;
-  background: radial-gradient(circle at 35% 30%, #f7e5b8, #c59756 78%);
-  border-radius: 50% 50% 48% 48%;
-  box-shadow: inset -2px 2px 4px rgba(0,0,0,0.12);
+  bottom: 16%;
+  width: 36px;
+  height: 36px;
+  margin-left: -18px;
+  background-image: url("Seed.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  z-index: 2;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: none;
+  transition: opacity 0.4s ease;
 }
 
 .tree-scene.stage-1 .seed {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 100%;
 }
 
 .sprout {
   position: absolute;
   left: 50%;
-  bottom: 20%;
-  width: 12px;
-  height: 72px;
-  margin-left: -6px;
+  bottom: 26%;
+  width: 16px;
+  height: 28px;
+  margin-left: -8px;
   background: linear-gradient(180deg, #4b7f39, #2f5c28);
-  border-radius: 10px;
+  border-radius: 50% 50% 8px 8px;
   opacity: 0;
   transform-origin: bottom center;
   transform: scaleY(0.7);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.tree-scene.stage-2 .sprout,
-.tree-scene.stage-3 .sprout {
+.tree-scene.stage-7 .sprout {
   opacity: 1;
   transform: scaleY(1);
 }
@@ -301,19 +376,102 @@ input[type="range"] {
 .tree-scene.stage-1 .branch,
 .tree-scene.stage-1 .flower,
 .tree-scene.stage-1 .lemon,
-.tree-scene.stage-1 .sprout {
+.tree-scene.stage-1 .sprout,
+.tree-scene.stage-1 .leaf-group {
   opacity: 0;
 }
 
-.tree-scene.stage-2 .leaves-left,
-.tree-scene.stage-2 .leaves-right,
-.tree-scene.stage-3 .leaves-left,
-.tree-scene.stage-3 .leaves-right,
-.tree-scene.stage-4 .leaves-left,
-.tree-scene.stage-4 .leaves-right,
-.tree-scene.stage-5 .leaves-left,
-.tree-scene.stage-5 .leaves-right {
+.tree-scene.stage-7 .leaves-left,
+.tree-scene.stage-7 .leaves-right {
   opacity: 1;
+}
+
+.tree-scene.stage-2 .germination-graphic {
+  opacity: 1;
+}
+
+.tree-scene.stage-3 .seedling-graphic {
+  opacity: 1;
+}
+
+.tree-scene.stage-4 .sapling-graphic {
+  opacity: 1;
+}
+
+.tree-scene.stage-5 .young-tree-graphic {
+  opacity: 1;
+}
+
+.tree-scene.stage-6 .flowering-graphic {
+  opacity: 1;
+}
+
+.tree-scene.stage-7 .fruiting-graphic {
+  opacity: 1;
+}
+
+.tree-scene.stage-2 .trunk,
+.tree-scene.stage-3 .trunk,
+.tree-scene.stage-4 .trunk,
+.tree-scene.stage-2 .branch,
+.tree-scene.stage-3 .branch,
+.tree-scene.stage-4 .branch,
+.tree-scene.stage-2 .leaf-group,
+.tree-scene.stage-3 .leaf-group,
+.tree-scene.stage-4 .leaf-group,
+.tree-scene.stage-2 .flower,
+.tree-scene.stage-3 .flower,
+.tree-scene.stage-4 .flower,
+.tree-scene.stage-2 .lemon,
+.tree-scene.stage-3 .lemon,
+.tree-scene.stage-4 .lemon,
+.tree-scene.stage-2 .sprout,
+.tree-scene.stage-3 .sprout,
+.tree-scene.stage-4 .sprout,
+.tree-scene.stage-2 .seed {
+  opacity: 0;
+}
+
+.tree-scene.stage-5 .trunk,
+.tree-scene.stage-5 .branch,
+.tree-scene.stage-5 .leaf-group,
+.tree-scene.stage-5 .flower,
+.tree-scene.stage-5 .lemon,
+.tree-scene.stage-5 .sprout,
+.tree-scene.stage-5 .seed,
+.tree-scene.stage-5 .germination-graphic,
+.tree-scene.stage-5 .seedling-graphic,
+.tree-scene.stage-5 .sapling-graphic {
+  opacity: 0;
+}
+
+.tree-scene.stage-6 .trunk,
+.tree-scene.stage-6 .branch,
+.tree-scene.stage-6 .leaf-group,
+.tree-scene.stage-6 .flower,
+.tree-scene.stage-6 .lemon,
+.tree-scene.stage-6 .sprout,
+.tree-scene.stage-6 .seed,
+.tree-scene.stage-6 .germination-graphic,
+.tree-scene.stage-6 .seedling-graphic,
+.tree-scene.stage-6 .sapling-graphic,
+.tree-scene.stage-6 .young-tree-graphic {
+  opacity: 0;
+}
+
+.tree-scene.stage-7 .trunk,
+.tree-scene.stage-7 .branch,
+.tree-scene.stage-7 .leaf-group,
+.tree-scene.stage-7 .flower,
+.tree-scene.stage-7 .lemon,
+.tree-scene.stage-7 .sprout,
+.tree-scene.stage-7 .seed,
+.tree-scene.stage-7 .germination-graphic,
+.tree-scene.stage-7 .seedling-graphic,
+.tree-scene.stage-7 .sapling-graphic,
+.tree-scene.stage-7 .young-tree-graphic,
+.tree-scene.stage-7 .flowering-graphic {
+  opacity: 0;
 }
 
 .flower,
@@ -343,16 +501,7 @@ input[type="range"] {
   transform: rotate(-12deg);
 }
 
-.tree-scene.stage-4 .flower,
-.tree-scene.stage-5 .flower {
-  opacity: 1;
-  transform: translateY(-4px);
-}
 
-.tree-scene.stage-5 .lemon {
-  opacity: 1;
-  transform: translateY(-8px);
-}
 
 .stage-details {
   background: var(--surface);

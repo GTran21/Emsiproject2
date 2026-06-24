@@ -13,21 +13,33 @@ const stages = [
   },
   {
     id: 3,
-    name: "Young Tree",
-    description: "The seedling grows stems and leaves as it develops a permanent root system.",
+    name: "Seedling",
+    description: "The seed sends up a small stem and first leaves while still relying on steady moisture.",
     className: "stage-3",
   },
   {
     id: 4,
-    name: "Flowering",
-    description: "Small fragrant blossoms appear before pollination and fruit formation.",
+    name: "Sapling",
+    description: "The young plant thickens and strengthens as it prepares for sustained above-ground growth.",
     className: "stage-4",
   },
   {
     id: 5,
+    name: "Young Tree",
+    description: "The seedling grows stems and leaves as it develops a permanent root system.",
+    className: "stage-5",
+  },
+  {
+    id: 6,
+    name: "Flowering",
+    description: "Small fragrant blossoms appear before pollination and fruit formation.",
+    className: "stage-6",
+  },
+  {
+    id: 7,
     name: "Fruiting",
     description: "Lemons mature over weeks, showing the final stage of the tree's seasonal growth.",
-    className: "stage-5",
+    className: "stage-7",
   },
 ];
 
