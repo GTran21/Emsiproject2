@@ -106,6 +106,7 @@ const farmerLanes = [];
 const farmers = [];
 const farmersPerRow = 3;
 const SAVE_CODE_PREFIX = "LSS1:";
+const BASE_PAGE_TITLE = "Lemon Store Simulator";
 
 function getTreesPerRow() {
   const rootStyles = getComputedStyle(document.documentElement);
@@ -349,9 +350,11 @@ function tickStage() {
 }
 
 function updateStats() {
-  lemonCountEl.textContent = formatNumber(Math.floor(lemons));
+  const wholeLemons = Math.floor(lemons);
+  lemonCountEl.textContent = formatNumber(wholeLemons);
   lemonsPerClickEl.textContent = formatNumber(getCurrentClickValue());
   lemonsPerSecondEl.textContent = formatNumber(lemonsPerSecond);
+  document.title = `${formatNumber(wholeLemons)} Lemons - ${BASE_PAGE_TITLE}`;
 }
 
 function renderUpgrades() {
