@@ -125,6 +125,7 @@ const loadSaveBtn = document.getElementById("loadSaveBtn");
 const saveStatusEl = document.getElementById("saveStatus");
 const themeDarkModeBtn = document.getElementById("themeDarkModeBtn");
 const themeLightModeBtn = document.getElementById("themeLightModeBtn");
+const lemonTitleEasterEggBtn = document.getElementById("lemonTitleEasterEggBtn");
 
 let lemons = 0;
 let clickBase = 1;
@@ -148,6 +149,8 @@ const farmers = [];
 const farmersPerRow = 3;
 const SAVE_CODE_PREFIX = "LSS1:";
 const BASE_PAGE_TITLE = "Lemon Store Simulator";
+const LEMON_RAIN_COUNT = 36;
+const LEMON_RAIN_BASE_DURATION_MS = 2800;
 const DEFAULT_LIGHT_THEME = Object.freeze({
   backgroundColor: "#f0df9b",
   surfaceColor: "#f7e7b4",
@@ -855,6 +858,30 @@ function autoLemonTick() {
   renderUpgrades();
 }
 
+function triggerLemonRain() {
+  for (let i = 0; i < LEMON_RAIN_COUNT; i += 1) {
+    const lemon = document.createElement("span");
+    lemon.className = "lemon-rain";
+    lemon.textContent = "🍋";
+    lemon.style.left = `${Math.random() * 100}vw`;
+    lemon.style.animationDelay = `${Math.random() * 0.6}s`;
+    lemon.style.setProperty(
+      "--lemon-rain-duration",
+      `${LEMON_RAIN_BASE_DURATION_MS + Math.floor(Math.random() * 700)}ms`
+    );
+
+    lemon.addEventListener(
+      "animationend",
+      () => {
+        lemon.remove();
+      },
+      { once: true }
+    );
+
+    document.body.appendChild(lemon);
+  }
+}
+
 if (storeUpgradesTabBtn) {
   storeUpgradesTabBtn.addEventListener("click", () => setActiveStoreTab("upgrades"));
 }
@@ -1021,6 +1048,10 @@ if (themeLightModeBtn) {
   themeLightModeBtn.addEventListener("click", () => {
     applyThemePreset(DEFAULT_LIGHT_THEME);
   });
+}
+
+if (lemonTitleEasterEggBtn) {
+  lemonTitleEasterEggBtn.addEventListener("click", triggerLemonRain);
 }
 
 lemonClickBtn.addEventListener("click", clickLemon);
